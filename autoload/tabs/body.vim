@@ -90,7 +90,7 @@ function! tabs#body#New()
 
 
 
-    function! object.autoConverTabToSpace() dict
+    function! object.autoConvertTabToSpace() dict
         call self.setIndentType()
 
         if self.isDisableFiletype()
@@ -100,6 +100,13 @@ function! tabs#body#New()
         if b:indentType ==? s:spaceFlag
             call self.converTabToSpace()
         endif
+    endfunction
+
+    function! object.converTabToSpace()
+        let default_expandtab = &expandtab
+        silent setlocal expandtab
+        silent %retab!
+        let &l:expandtab = default_expandtab
     endfunction
 
 
