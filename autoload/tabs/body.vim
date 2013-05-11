@@ -16,7 +16,11 @@ function! tabs#body#New()
 
 
     " buffer localな変数であるb:indentTypeにbufferのインデント文字を保持する
-    function! object.getIndentType()
+    function! object.getIndentType() dict
+        if self.isDisableFiletype()
+            return &expandtab ? s:tabFlag : s:spaceFlag
+        endif
+
         if exists('b:indentType')
             return b:indentType
         endif
@@ -58,7 +62,7 @@ function! tabs#body#New()
         \                   : s:var.lineMax
         let lines     = Util.getFilterdLines(l:maxLine, '\v^\s{2,}\S', 1)
 
-        let lines = map(lines, 'match(v:var, ''\S'')')
+        let lines = map(lines, 'match(v:val, ''\S'')')
 
         return min(lines) !=# 0 ? min(lines) : &tabstop
     endfunction
@@ -89,11 +93,7 @@ function! tabs#body#New()
     function! object.autoConverTabToSpace() dict
         call self.setIndentType()
 
-        let disableFieltype = exists('g:smart_tab_disable_filetype')
-        \                       ?   g:smart_tab_disablee_filetype
-        \                       :   s:var.disable_filetype
-
-        if disableFieltype ==# &filetype
+        if self.isDisableFiletype()
             return
         endif
 
@@ -103,6 +103,12 @@ function! tabs#body#New()
     endfunction
 
 
+    function! object.isDisableFiletype()
+        let disable = exists('g:smart_tab_disable_filetype')
+        \       ?   g:smart_tab_disable_filetype
+        \       :   s:var.disable_filetype
+        return index(disable, &filetype) !=# -1
+    endfunction
 
 
     return object
