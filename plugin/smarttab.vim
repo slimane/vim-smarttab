@@ -5,7 +5,7 @@ let s:var = tabs#var#New()
 
 command! -nargs=0 CondidacyIndentSize  call s:body.condidancy()
 command! -nargs=0 IndentTypeCheck      call s:body.setIndentType()
-command! -nargs=0 TabFormatting        call s:body.autoConverTabToSpace()
+command! -nargs=0 TabFormatting        call s:body.autoConvertTabToSpace()
 
 if !exists('g:smarttab_auto_expand_disable')
     augroup vim-smarttab.vim
