@@ -5,7 +5,8 @@ let s:disable_smarttab_filetype =
 \           ['markdown'
 \           , 'snippet'
 \           , 'gitcommit'
-\           , 'snippet']
+\           , 'snippet'
+\           , 'haskell']
 
 function! tabs#var#New()
     let object = {}
