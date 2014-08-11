@@ -3,7 +3,7 @@ let s:tabFlag   = 1
 let s:lineMax = 200
 let s:disable_smarttab_filetype =
 \           ['markdown'
-\           , 'snippet'
+\           , 'neosnippet'
 \           , 'gitcommit'
 \           , 'snippet'
 \           , 'haskell']
